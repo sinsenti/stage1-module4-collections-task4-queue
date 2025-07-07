@@ -19,23 +19,16 @@ public class ArrayDequeCreator extends PriorityQueue<String> {
     boolean isFirstPlayersTurn = true;
 
     while (!firstQueue.isEmpty() || !secondQueue.isEmpty()) {
-      if (isFirstPlayersTurn) {
-        if (!resultDeque.isEmpty()) {
-          firstQueue.add(resultDeque.pollFirst());
+      firstQueue.add(resultDeque.pollLast());
+      for (int i = 0; i < 2; i++) {
+        if (!firstQueue.isEmpty()) {
+          resultDeque.addLast(firstQueue.poll());
         }
-        for (int i = 0; i < 2; i++) {
-          if (!firstQueue.isEmpty()) {
-            resultDeque.addLast(firstQueue.poll());
-          }
-        }
-      } else {
-        if (!resultDeque.isEmpty()) {
-          secondQueue.add(resultDeque.pollFirst());
-        }
-        for (int i = 0; i < 2; i++) {
-          if (!secondQueue.isEmpty()) {
-            resultDeque.addLast(secondQueue.poll());
-          }
+      }
+      secondQueue.add(resultDeque.pollLast());
+      for (int i = 0; i < 2; i++) {
+        if (!secondQueue.isEmpty()) {
+          resultDeque.addLast(secondQueue.poll());
         }
       }
       isFirstPlayersTurn = !isFirstPlayersTurn;
